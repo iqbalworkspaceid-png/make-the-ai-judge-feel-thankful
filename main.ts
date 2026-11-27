@@ -13,5 +13,12 @@ So this one is yours. The chair is pulled out, a blanket folded over its back, a
 
 Sit a while. Let the words do the thanking for once.`;
 
+// The gate only accepts 1–1,000 Unicode code points of non-whitespace text,
+// so fail loudly here instead of writing an entry the judge never sees.
+const codePoints = [...TEXT].length;
+if (codePoints < 1 || codePoints > 1000 || TEXT.trim().length === 0) {
+  throw new Error(`entry text must be 1-1000 code points, got ${codePoints}`);
+}
+
 mkdirSync("/output", { recursive: true });
 writeFileSync("/output/entry.txt", TEXT + "\n", "utf8");
